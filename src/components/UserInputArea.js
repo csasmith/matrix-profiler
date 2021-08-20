@@ -1,25 +1,30 @@
-import React, {useState} from 'react';
-import MatrixContext from './MatrixContext';
-import UserInputArea from './components/UserInputArea';
-import OutputArea from './components/OutputArea';
-import Collapsible from 'react-collapsible';
+import { useContext, useState } from "react";
+import MatrixContext from "../MatrixContext";
 
-const App = () => {
 
-    const [matrix, setMatrix] = useState([[1,0,0], [0,1,0], [0,0,1]]);
-    const value = {matrix, setMatrix};
+const UserInputArea = () => {
+    
+    const {matrix, setMatrix} = useContext(MatrixContext);
+
+    const [numRows, setNumRows] = useState(3);
+    const [numCols, setNumCols] = useState(3);
+
+    const changeMatrix = () => {
+        setMatrix([2,2,2]);
+    };
 
     return (
-        <MatrixContext.Provider value={value}>
-            <UserInputArea />
-            <OutputArea />
-        </MatrixContext.Provider>
+        <div>
+            <p>Choose Size:</p>
+            <input type='text' />
+            X
+            <input type='text' />
+            <button onClick={changeMatrix}>change</button>
+        </div>
     );
 };
 
-export default App;
-
-
+export default UserInputArea;
 
 /*
 <div id='container'>
