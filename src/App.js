@@ -12,6 +12,7 @@ const App = () => {
     return (
         <MatrixContext.Provider value={value}>
             <UserInputArea />
+            <br />
             <OutputArea />
         </MatrixContext.Provider>
     );

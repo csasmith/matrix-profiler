@@ -1,25 +1,33 @@
 import { useContext, useState } from "react";
 import MatrixContext from "../MatrixContext";
+import MatrixInput from './MatrixInput';
 
 
 const UserInputArea = () => {
-    
-    const {matrix, setMatrix} = useContext(MatrixContext);
 
     const [numRows, setNumRows] = useState(3);
     const [numCols, setNumCols] = useState(3);
+    const { matrix, setMatrix } = useContext(MatrixContext);
 
-    const changeMatrix = () => {
-        setMatrix([2,2,2]);
+    // literally no error handling
+    const handleRowChange = (e) => {
+        const rows = parseInt(e.target.value);
+        setNumRows(rows);
+        // use either slice or map/filter for updating matrix with new size...
+    };
+
+    const handleColChange = (e) => {
+        const cols = parseInt(e.target.value);
+        setNumCols(cols);
     };
 
     return (
         <div>
             <p>Choose Size:</p>
-            <input type='text' />
+            <input type='text' onBlur={(e) => handleRowChange(e)}/>
             X
-            <input type='text' />
-            <button onClick={changeMatrix}>change</button>
+            <input type='text' onBlur={(e) => handleColChange(e)}/>
+            <MatrixInput numRows={numRows} numCols={numCols}/>
         </div>
     );
 };
